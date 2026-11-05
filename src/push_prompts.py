@@ -57,7 +57,7 @@ def push_prompt_to_langsmith(prompt_name: str, prompt_data: dict) -> bool:
     Returns:
         True se sucesso, False caso contrário
     """
-    ...
+    client = Client()
 
 
 def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
