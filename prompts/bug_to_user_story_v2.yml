@@ -28,12 +28,7 @@ bug_to_user_story_v2:
         "bug_report": "O campo de quantidade está permitindo valores inválidos (negativos e zeros)."
       },
       "outputs": {
-        "reference": "Como um vendedor inserindo uma novo pedido de venda, eu quero que o sistema valide a inserção de valores negativos ou zero nos campos de quantidade, para evitar inconsistências nos relatórios de vendas.\n\nCritérios de Aceitação:\n- Dado que o usuário está inserindo um valor no campo de quantidade\n- Quando o usuário tenta inserir um valor negativo ou zero\n- Então o sistema deve exibir uma mensagem de erro e impedir a submissão"
-      },
-      "metadata": {
-        "domain": "e-commerce",
-        "type": "UI/UX",
-        "complexity": "simple"
+        "reference": "Como um vendedor inserindo uma novo pedido de venda, eu quero que o sistema valide a inserção de valores negativos ou zero nos campos de quantidade, para evitar inconsistências nos relatórios de vendas.\n\nCritérios de Aceitação:\n- Dado que o usuário está inserindo um valor no campo de quantidade\n- Quando o usuário tenta inserir um valor negativo ou zerado\n- Então o sistema não deve permitir o registro deste valor"
       }
     }
 
@@ -43,13 +38,7 @@ bug_to_user_story_v2:
         "bug_report": "O campo cnpj da api de fornecedores está retornando vazio em vez da informação cadastrada."
       },
       "outputs": {
-        "reference": "Como um usuario da api de fornecedores, eu quero que o sistema retorne o cnpj do fornecedor corretamente, para poder consultar internamente em meus sistemas.\n\nCritérios de Aceitação:\n- Dado que o endpoint GET fornecedores é chamado\n- Quando o usuário acessa o endpoint\n- Então o sistema deve retornar todos os dados do fornecedor, incluindo o cnpj corretamente"
-      },
-      "metadata": {
-        "domain": "API",
-        "type": "correctness",
-        "complexity": "complex",
-        "severity": "critical"
+        "reference": "Como um usuario da api de fornecedores, eu quero que o sistema retorne o cnpj do fornecedor corretamente, para poder consultar internamente em meus sistemas.\n\nCritérios de Aceitação:\n- Dado que o fornecedor possui CNPJ cadastrado\n- Quando as informacoes forem consultadas no endpoint GET fornecedores\n- Então o sistema deve retornar todos os dados do fornecedor, incluindo o cnpj corretamente"
       }
     }
       
