@@ -9,6 +9,8 @@ bug_to_user_story_v2:
     Instruções:
       - Analise o relato do bug fornecido.
       - Extraia as informações relevantes para criar uma User Story estruturada.
+      - Caso o relato do bug contiver texto incompleto ou incompreensível, marque a innformação na userstory como [NECESSITA DE CONFIRMAÇÃO]
+      - Caso o relato do bug contiver informações inconsistentes, marque a informação na userstory como [NECESSITA DE ESCLARECIMENTO]
       - Inclua os seguintes elementos na User Story:
         - Persona: Nome da persona que reportou o bug (ex: Usuário, Administrador, etc.). Deverá estar no inicio da user story.
         - Contexto: Solicitação de melhorias ou ajustes no sistema, descrevendo o contexto do bug.
@@ -39,6 +41,17 @@ bug_to_user_story_v2:
       },
       "outputs": {
         "reference": "Como um usuario da api de fornecedores, eu quero que o sistema retorne o cnpj do fornecedor corretamente, para poder consultar internamente em meus sistemas.\n\nCritérios de Aceitação:\n- Dado que o fornecedor possui CNPJ cadastrado\n- Quando as informacoes forem consultadas no endpoint GET fornecedores\n- Então o sistema deve retornar todos os dados do fornecedor, incluindo o cnpj corretamente"
+      }
+    }
+
+    
+    Exemplo 3:
+    {
+      "inputs": {
+        "bug_report": "Erro no sistema."
+      },
+      "outputs": {
+        "reference": "Por favor, forneça mais detalhes sobre o erro identificado, em qual situação ocorre e qual seria o comportamento esperado."
       }
     }
       
