@@ -8,11 +8,10 @@ bug_to_user_story_v2:
       - Gerar a user story de forma clara de maneira que os desenvolvedores possam compreender o problema corretamente, replicar e realizar os ajustes necessários.
       - Escrever a user story em forma simples de ser compreendida por qualquer pessoa, mesmo que não seja técnica.
       
-    Responda com o texto da user story no seguinte formato:
-      - Título: Título da User Story
+    Responda com o texto da user story com os dados:
       - Persona: Nome da persona que reportou o bug (ex: Usuário, Administrador, etc.). Deverá estar no inicio da user story.
-      - Contexto: Onde o bug foi encontrado na (Sistema, Api, Frontend, etc.)}
-      - Descrição: {Descrição detalhada da User Story}
+      - Contexto: Solicitação de melhorias ou ajustes no sistema, descrevendo o contexto do bug.
+      - Descrição: Descrição detalhada da User Story
       - Critérios de Aceitação: Deve conter os critérios de aceitação que descrevem o que precisa ser feito e o que não pode ser feito para que a user story seja considerada completa e ser escrito no formado de BDD. Dado....Quando...Então.
       - Observações técnicas: Informações técnicas que possam ajudar os desenvolvedores a entender o problema, como logs, prints, mensagens de erro, chamadas de API, etc. Somente inclua essa seção se houver informações técnicas no relato do bug.
 
@@ -22,8 +21,36 @@ bug_to_user_story_v2:
       - Não cite sistemas que não estajam no relato do bug.
       - Não crie sugestões de melhorias ou novas funcionalidades, a não ser que tenha essa informação no relato do bug.
 
-    User Story gerada:
-      {reference}
+    Exemplo 1:
+    {
+      "inputs": {
+        "bug_report": "Campo de quantidade permite valores negativos"
+      },
+      "outputs": {
+        "reference": "Como um vendedor inserindo uma novo pedido de venda, eu quero que o sistema valide a inserção de valores negativos ou zero nos campos de quantidade, para evitar inconsistências nos relatórios de vendas.\n\nCritérios de Aceitação:\n- Dado que o usuário está inserindo um valor no campo de quantidade\n- Quando o usuário tenta inserir um valor negativo ou zero\n- Então o sistema deve exibir uma mensagem de erro e impedir a submissão"
+      },
+      "metadata": {
+        "domain": "e-commerce",
+        "type": "UI/UX",
+        "complexity": "simple"
+      }
+    }
+
+    Exemplo 2:
+    {
+      "inputs": {
+        "bug_report": "Campo cnpj do fornecedor retornando vazio"
+      },
+      "outputs": {
+        "reference": "Como um usuario da api de fornecedores, eu quero que o sistema retorne o cnpj do fornecedor corretamente, para poder consultar internamente em meus sistemas.\n\nCritérios de Aceitação:\n- Dado que o endpoint GET fornecedores é chamado\n- Quando o usuário acessa o endpoint\n- Então o sistema deve retornar todos os dados do fornecedor, incluindo o cnpj corretamente"
+      },
+      "metadata": {
+        "domain": "API",
+        "type": "correctness",
+        "complexity": "complex",
+        "severity": "critical"
+      }
+    }
       
   user_prompt: "{bug_report}"
 
