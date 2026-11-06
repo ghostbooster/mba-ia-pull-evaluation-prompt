@@ -28,6 +28,6 @@ bug_to_user_story_v2:
   user_prompt: "{bug_report}"
 
     # Metadados
-  version: "v1"
+  version: "v2"
   created_at: "2026-11-05"
   tags: ["bug-analysis", "user-story", "product-management"]
