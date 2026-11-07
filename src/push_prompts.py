@@ -93,8 +93,6 @@ def main():
 if __name__ == "__main__":
     prompt_file = load_yaml("./prompts/bug_to_user_story_v2.yml")
 
-  #  print(prompt_file)
-
     if 'bug_to_user_story_v2' in prompt_file:
         messages = [
             ("system", prompt_file['bug_to_user_story_v2']['system_prompt']),
