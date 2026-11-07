@@ -40,6 +40,7 @@ import os
 import sys
 from dotenv import load_dotenv
 from langsmith import Client
+from langsmith.utils import LangSmithConflictError
 from langchain_core.prompts import ChatPromptTemplate
 from utils import load_yaml, check_env_vars, print_section_header
 
@@ -67,6 +68,14 @@ def push_prompt_to_langsmith(prompt_name, description: str, prompt_data) -> bool
             is_public=True
         )
         return True
+    except LangSmithConflictError as e:
+        if "Nothing to commit" in str(e):
+            print(f"ℹ️ Prompt '{prompt_name}' não foi alterado.")
+            print("A versão atual já está publicada no LangSmith.")
+            return True
+
+        print(f"❌ Conflito no LangSmith: {e}")
+        return False
     except Exception as e:
         if "Error while trying to commit" not in str(e):
             raise
@@ -102,8 +111,6 @@ if __name__ == "__main__":
         prompt = ChatPromptTemplate.from_messages(messages)    
     
         success = push_prompt_to_langsmith("bug_to_user_story_v2", "Prompt otimizado para conversão de bug em história de usuário", prompt)
-
-        print(success)
     else:
         print("❌ Estrutura de prompt inválida. O arquivo deve conter a chave 'bug_to_user_story_v2'.")
         sys.exit(1)
