@@ -46,7 +46,7 @@ from utils import load_yaml, check_env_vars, print_section_header
 load_dotenv()
 
 
-def push_prompt_to_langsmith(prompt_name: str, prompt_data: dict) -> bool:
+def push_prompt_to_langsmith(prompt_name, description: str, prompt_data) -> bool:
     """
     Faz push do prompt otimizado para o LangSmith Hub (PÚBLICO).
 
@@ -56,8 +56,20 @@ def push_prompt_to_langsmith(prompt_name: str, prompt_data: dict) -> bool:
 
     Returns:
         True se sucesso, False caso contrário
-    """
+    """   
     client = Client()
+
+    try:
+        client.push_prompt(
+            prompt_identifier=prompt_name,
+            object=prompt,
+            description=description,
+            is_public=True
+        )
+        return True
+    except Exception as e:
+        if "Error while trying to commit" not in str(e):
+            raise
 
 
 def validate_prompt(prompt_data: dict) -> tuple[bool, list]:
@@ -79,4 +91,22 @@ def main():
 
 
 if __name__ == "__main__":
+    prompt_file = load_yaml("./prompts/bug_to_user_story_v2.yml")
+
+  #  print(prompt_file)
+
+    if 'bug_to_user_story_v2' in prompt_file:
+        messages = [
+            ("system", prompt_file['bug_to_user_story_v2']['system_prompt']),
+            ("human", prompt_file['bug_to_user_story_v2']['user_prompt'])
+        ]
+
+        prompt = ChatPromptTemplate.from_messages(messages)    
+    
+        success = push_prompt_to_langsmith("bug_to_user_story_v2", "Prompt otimizado para conversão de bug em história de usuário", prompt)
+
+        print(success)
+    else:
+        print("❌ Estrutura de prompt inválida. O arquivo deve conter a chave 'bug_to_user_story_v2'.")
+        sys.exit(1)
     sys.exit(main())
