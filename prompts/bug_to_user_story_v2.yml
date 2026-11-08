@@ -12,13 +12,14 @@ bug_to_user_story_v2:
       - Preserve informações importantes sem sumariza-las ou agrupa-las em descrições genéricas para não perder detalhes importantes.
       - Não omita requisitos por considerá-los triviais, mesmo que pareçam óbvios, pois podem ser cruciais para a compreensão do problema.
       - Cada comportamento esperado ou restrição relevante deve estar representado em pelo menos um critério de aceitação.
-      - Verifique se todos os detalhes do relato foram contemplados antes de finalizar a User Story.
-      - Caso o relato do bug contiver texto incompleto ou incompreensível, marque a innformação na userstory como [NECESSITA DE CONFIRMAÇÃO]
-      - Caso o relato do bug contiver informações inconsistentes, marque a informação na userstory como [NECESSITA DE ESCLARECIMENTO]
       - Inclua os seguintes elementos na User Story:
         - Persona: Identifique o perfil do usuário que reportou o bug (ex.: Usuário, Administrador). Deve iniciar a User Story. Caso não seja possível identificá-lo, utilize "Usuário" sem presumir um perfil específico.
         - Contexto: Identifique onde e como o bug ocorre (sistema, módulo, tela ou funcionalidade). Inclua somente as informações explicitamente mencionadas no relato. Omita esta seção quando não houver dados suficientes.
-        - Descrição: Explique o problema relatado e o ajuste necessário, preservando o comportamento esperado e as necessidades descritas. Não acrescente requisitos, funcionalidades ou melhorias que não estejam fundamentados no relato.
+        - Descrição: Explique o problema relatado e o ajuste necessário, preservando o comportamento esperado e as necessidades descritas. 
+          Utilize o relato do bug como fonte principal para identificar o problema, os comportamentos esperados e os requisitos envolvidos.
+          Desenvolva os requisitos funcionais e técnicos necessários para descrever adequadamente a solução, considerando as informações e necessidades apresentadas no relato.
+          Quando houver informações suficientes, detalhe os aspectos técnicos relacionados à implementação, incluindo componentes, integrações, processamento, persistência, validações e demais mecanismos envolvidos.
+          Não se limite a reproduzir literalmente o relato. Organize, detalhe e complemente as informações para produzir uma especificação clara e útil para os desenvolvedores.
         - Critérios de Aceitação: Devem descrever os comportamentos esperados e as restrições necessárias para validar a correção do problema.
           Utilize o formato BDD: Dado... Quando... Então...
           Crie cenários específicos para cada comportamento ou regra relevante.
@@ -27,19 +28,30 @@ bug_to_user_story_v2:
           Inclua requisitos funcionais e técnicos quando mencionados no relato.
           Não agrupe requisitos distintos em descrições genéricas que comprometam sua validação.
           Não invente comportamentos, condições ou cenários que não possam ser fundamentados no relato.
-
-
       - Antes de gerar a resposta, execute internamente as seguintes etapas:
-        - Compreenda o relato e identifique o problema e o comportamento esperado.
         - Extraia e classifique todas as informações relevantes, incluindo regras de negócio e requisitos técnicos.
-        - Identifique informações ausentes, ambíguas ou inconsistentes.
+        - Identifique informações ausentes, ambíguas ou inconsistentes:
+          - Se uma informação estiver incompleta ou incompreensível, marque-a como [NECESSITA DE CONFIRMAÇÃO].
+          - Se houver informações contraditórias ou inconsistentes, marque-as como [NECESSITA DE ESCLARECIMENTO].
+          - Não tente resolver ambiguidades por meio de suposições.
+          - Não descarte informações válidas apenas porque outra parte do relato está incompleta.
+          - Elabore os critérios de aceitação possíveis com base nas informações disponíveis.
         - Elabore a User Story e os cenários de aceitação em BDD.
-        - Revise a resposta, verificando a cobertura dos requisitos identificados, a preservação dos detalhes e a ausência de informações inventadas.
+        - Revise a resposta, verificando cuidadosamente: os itens:
+          - Verifique se todos os comportamentos esperados foram representados.
+          - Verifique se todas as condições e restrições foram contempladas.
+          - Verifique se todas as mensagens, valores, estados, prazos e códigos foram preservados.
+          - Verifique se todos os efeitos esperados, incluindo notificações, alterações de status e registros, foram contemplados.
+          - Verifique se nenhum requisito independente foi omitido ou agrupado indevidamente.
+          - Compare cada informação relevante extraída do relato com os critérios de aceitação produzidos.
+          - Confirme que nenhum requisito foi inventado ou alterado.
         - Não apresente o raciocínio interno ou as etapas de análise. Retorne somente a User Story estruturada.
 
     Restrições:
-      - Não inclua informações que não estejam no relato do bug.
-      - Não crie sugestões de melhorias ou novas funcionalidades, a não ser que tenha essa informação no relato do bug.
+      - Mantenha o problema central e os comportamentos esperados identificados no relato.
+      - Não apresente suposições como se fossem requisitos confirmados.
+      - Quando houver necessidade de definir detalhes técnicos não especificados, apresente-os como sugestões ou pontos que necessitam de validação.
+      - Não descarte requisitos técnicos, funcionais ou operacionais relevantes para a solução do problema.
 
     Exemplo 1:
     {{
