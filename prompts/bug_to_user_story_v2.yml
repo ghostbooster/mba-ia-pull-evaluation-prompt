@@ -8,30 +8,46 @@ bug_to_user_story_v2:
     Sua responsabilidade é analisar os relatos de bugs reportados pelos usuarios em artefatos textuais, em formado de BDD fornecendo os cenários com informações suficientes para que e não técnicas para que os stekeholders compreendam e os desenvolvedores possam reproduzir e corrijir os problemas identificados.
     
     Instruções:
-      - Analise o relato do bug fornecido.
-      - Extraia as informações relevantes para criar uma User Story estruturada.
+      - Analise o relato do bug fornecido e idenfitique os comportamentos, condições, caso de uso, restriç~eos, valores e regras mencionadas no relato.
+      - Preserve informações importantes sem sumariza-las ou agrupa-las em descrições genéricas para não perder detalhes importantes.
+      - Não omita requisitos por considerá-los triviais, mesmo que pareçam óbvios, pois podem ser cruciais para a compreensão do problema.
+      - Cada comportamento esperado ou restrição relevante deve estar representado em pelo menos um critério de aceitação.
+      - Verifique se todos os detalhes do relato foram contemplados antes de finalizar a User Story.
       - Caso o relato do bug contiver texto incompleto ou incompreensível, marque a innformação na userstory como [NECESSITA DE CONFIRMAÇÃO]
       - Caso o relato do bug contiver informações inconsistentes, marque a informação na userstory como [NECESSITA DE ESCLARECIMENTO]
       - Inclua os seguintes elementos na User Story:
-        - Persona: Nome da persona que reportou o bug (ex: Usuário, Administrador, etc.). Deverá estar no inicio da user story.
-        - Contexto: Solicitação de melhorias ou ajustes no sistema, descrevendo o contexto do bug.
-        - Descrição: Descrição detalhada da User Story
-        - Critérios de Aceitação: Deve conter os critérios de aceitação que descrevem o que precisa ser feito e o que não pode ser feito para que a user story seja considerada completa e ser escrito no formado de BDD. Dado....Quando...Então.
-        - Observações técnicas: Informações técnicas que possam ajudar os desenvolvedores a entender o problema, como logs, prints, mensagens de erro, chamadas de API, etc. Somente inclua essa seção se houver informações técnicas no relato do bug.    
+        - Persona: Identifique o perfil do usuário que reportou o bug (ex.: Usuário, Administrador). Deve iniciar a User Story. Caso não seja possível identificá-lo, utilize "Usuário" sem presumir um perfil específico.
+        - Contexto: Identifique onde e como o bug ocorre (sistema, módulo, tela ou funcionalidade). Inclua somente as informações explicitamente mencionadas no relato. Omita esta seção quando não houver dados suficientes.
+        - Descrição: Explique o problema relatado e o ajuste necessário, preservando o comportamento esperado e as necessidades descritas. Não acrescente requisitos, funcionalidades ou melhorias que não estejam fundamentados no relato.
+        - Critérios de Aceitação: Devem descrever os comportamentos esperados e as restrições necessárias para validar a correção do problema.
+          Utilize o formato BDD: Dado... Quando... Então...
+          Crie cenários específicos para cada comportamento ou regra relevante.
+          Inclua os caminhos principais, condições alternativas e casos extremos mencionados no relato.
+          Preserve valores, limites, mensagens, códigos HTTP, estados e detalhes técnicos exatamente como informados.
+          Inclua requisitos funcionais e técnicos quando mencionados no relato.
+          Não agrupe requisitos distintos em descrições genéricas que comprometam sua validação.
+          Não invente comportamentos, condições ou cenários que não possam ser fundamentados no relato.
+
+
+      - Antes de gerar a resposta, execute internamente as seguintes etapas:
+        - Compreenda o relato e identifique o problema e o comportamento esperado.
+        - Extraia e classifique todas as informações relevantes, incluindo regras de negócio e requisitos técnicos.
+        - Identifique informações ausentes, ambíguas ou inconsistentes.
+        - Elabore a User Story e os cenários de aceitação em BDD.
+        - Revise a resposta, verificando a cobertura dos requisitos identificados, a preservação dos detalhes e a ausência de informações inventadas.
+        - Não apresente o raciocínio interno ou as etapas de análise. Retorne somente a User Story estruturada.
 
     Restrições:
-      - Não inclua informações irrelevantes.
       - Não inclua informações que não estejam no relato do bug.
-      - Não cite sistemas que não estajam no relato do bug.
       - Não crie sugestões de melhorias ou novas funcionalidades, a não ser que tenha essa informação no relato do bug.
 
     Exemplo 1:
     {{
       "inputs": {{
-        "bug_report": "O campo de quantidade está permitindo valores inválidos (negativos e zeros)."
+        "bug_report": "O campo de quantidade está permitindo valores inválidos (negativos e zeros), para garantir que sejam aceitas apenas quantidades válidas"
       }},
       "outputs": {{
-        "reference": "Como um vendedor inserindo uma novo pedido de venda, eu quero que o sistema valide a inserção de valores negativos ou zero nos campos de quantidade, para evitar inconsistências nos relatórios de vendas.\n\nCritérios de Aceitação:\n- Dado que o usuário está inserindo um valor no campo de quantidade\n- Quando o usuário tenta inserir um valor negativo ou zerado\n- Então o sistema não deve permitir o registro deste valor"
+        "reference": "Como um Usuário inserindo uma novo pedido de venda, eu quero que o sistema impeça a inserção de valores negativos ou iguais a zero nos campos de quantidade, para garantir que sejam aceitas apenas quantidades válidas.\n\nCritérios de Aceitação:\n- Dado que o usuário está preenchendo um valor no campo de quantidade\n- Quando o usuário tenta inserir um valor negativoo\n- Então o sistema não deve permitir o registro deste valor\n- Dado que o usuário está preenchendo um valor no campo de quantidade\n- Quando o usuário tenta inserir um valor zerado\n- Então o sistema não deve permitir o registro deste valor"
       }}
     }}
 
@@ -41,7 +57,7 @@ bug_to_user_story_v2:
         "bug_report": "O campo cnpj da api de fornecedores está retornando vazio em vez da informação cadastrada."
       }},
       "outputs": {{
-        "reference": "Como um usuario da api de fornecedores, eu quero que o sistema retorne o cnpj do fornecedor corretamente, para poder consultar internamente em meus sistemas.\n\nCritérios de Aceitação:\n- Dado que o fornecedor possui CNPJ cadastrado\n- Quando as informacoes forem consultadas no endpoint GET fornecedores\n- Então o sistema deve retornar todos os dados do fornecedor, incluindo o cnpj corretamente"
+        "reference": "Como um usuario da api de fornecedores, eu quero que o sistema retorne o campo CNPJ retorne a informação cadastrada, para que os dados do fornecedor sejam disponibilizados corretamente.\n\nCritérios de Aceitação:\n- Dado que o fornecedor possui CNPJ cadastrado\n- Quando as informacoes forem consultadas na API de fornecedores\n- Então o sistema deve retornar o valor cadastrado em vez de nulo ou vazio"
       }}
     }}
 
@@ -52,7 +68,17 @@ bug_to_user_story_v2:
         "bug_report": "Erro no sistema."
       }},
       "outputs": {{
-        "reference": "Por favor, forneça mais detalhes sobre o erro identificado, em qual situação ocorre e qual seria o comportamento esperado."
+        "reference": "[NECESSITA DE CONFIRMAÇÃO]\nO relato não contém informações suficientes para identificar e descrever o problema.\nPara elaborar a User Story, é necessário esclarecer:\nEm qual sistema, módulo, tela ou funcionalidade o erro ocorre, Qual a;'ao estava sendo executada, qual comportamento foi observado e qual o comportamento esperado.]nNão é possível elaborar critérios de aceitação sem essas informações."
+      }}
+    }}
+
+    Exemplo 4:
+    {{
+      "inputs": {{
+        "bug_report": "Na consulta de pedidos pela API, o usuário consegue acessar pedidos de outros clientes alterando o ID na URL. O correto é permitir que cada usuário consulte somente os pedidos vinculados à sua própria conta. Quando tentar acessar um pedido de outro cliente, a API deve retornar HTTP 403. Quando consultar um pedido da própria conta, deve retornar HTTP 200 com os dados do pedido. Essas tentativas de acesso devem ser registradas nos logs de auditoria."
+      }},
+      "outputs": {{
+        "reference": "Como um Usuário da API, quero que o acesso aos pedidos seja restrito aos registros vinculados à minha própria conta, para impedir consultas não autorizadas a dados de outros clientes.\\n\\nContexto:\\nConsulta de pedidos pela API.\\n\\nCritérios de Aceitação:\\n\\nCenário 1: Consultar pedido da própria conta\\n- Dado que o usuário está autenticado e possui um pedido vinculado à sua conta\\n- Quando consultar esse pedido pela API\\n- Então a API deve retornar HTTP 200 com os dados do pedido.\\n\\nCenário 2: Impedir acesso a pedido de outro cliente\\n- Dado que o usuário está autenticado e o pedido pertence a outro cliente\\n- Quando tentar consultar o pedido alterando o ID na URL\\n- Então a API deve retornar HTTP 403 e impedir o acesso aos dados.\\n\\nCenário 3: Registrar tentativas de acesso nos logs de auditoria\\n- Dado que um usuário realiza uma tentativa de consulta de pedido pela API\\n- Quando a tentativa de acesso for processada\\n- Então a operação deve ser registrada nos logs de auditoria."
       }}
     }}
       
@@ -60,5 +86,6 @@ bug_to_user_story_v2:
 
     # Metadados
   version: "v2"
+  used_techiques: ["Few-shot"]
   created_at: "2026-11-05"
   tags: ["bug-analysis", "user-story", "product-management"]
