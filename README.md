@@ -2,8 +2,8 @@
 
 ## 1. Contexto inicial e referência no LangSmith
 
-O prompt original `bug_to_user_story_v1.yml`, disponível no LangSmith,
-para pull apresenta algumas diferenças em relação à versão
+O prompt original `bug_to_user_story_v1.yml`, disponível no LangSmith
+para pull, apresenta algumas diferenças em relação à versão
 `bug_to_user_story_v1.yml` mantida no repositório Git utilizado como
 fork, mas isso não é um problema, apenas uma curiosidade.
 
@@ -18,22 +18,29 @@ LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/
 ![alt text](image.png)
 
 #### Imagem iteração com sucesso
+
 ![alt text](image-1.png)
 
-**Nota**: As duas primeiras iteraações estava sem créditos e por isso o pontuação tão baixa. Sendo assim considero como 1 a terceira iteração na tela do Langsmith
+**Nota**: As duas primeiras iterações estavam sem créditos e por isso a
+pontuação foi tão baixa. Sendo assim, considero como 1 a terceira
+iteração na tela do LangSmith.
 
 ### 1.1 Experimentos com falha, apenas para acompanhamento
 
-[**Iteração 1 no LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=e9bb0934-e902-4ae3-8da9-389a127ef95e)
+[**Iteração 1 no
+LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=e9bb0934-e902-4ae3-8da9-389a127ef95e)
 
-[**Iteração 2 no LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=67b8294d-c08c-48b4-9472-e5e7561f0372)
+[**Iteração 2 no
+LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=67b8294d-c08c-48b4-9472-e5e7561f0372)
 
-[**Iteração 3 no LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=44a40ebd-9a4c-493a-b394-38865547023b)
+[**Iteração 3 no
+LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=44a40ebd-9a4c-493a-b394-38865547023b)
 
-[**Iteração 4 no LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=5f79c910-5036-4935-b34d-8fea3923f1ff)
+[**Iteração 4 no
+LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=5f79c910-5036-4935-b34d-8fea3923f1ff)
 
-[**Iteração 5 no LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=d23fdeef-6639-4296-8eb2-51578c8ac158)
-
+[**Iteração 5 no
+LangSmith**](https://smith.langchain.com/o/a56b7942-a2b5-4525-806c-8da1cd8a98a2/a/-/datasets/4478aa2d-870f-4cfa-b623-ba3dabdc56dd/compare?selectedSessions=d23fdeef-6639-4296-8eb2-51578c8ac158)
 
 ## 2. Objetivo
 
@@ -149,16 +156,38 @@ A remoção permitiu que o modelo desenvolvesse melhor os aspectos
 técnicos relacionados ao problema, sem abandonar a necessidade de
 diferenciar informações confirmadas de suposições.
 
-Após essa alteração, a iteração 6 apresentou resultados suficientes para atingir os 80%.
+Após essa alteração, a iteração 6 apresentou resultados suficientes para
+atingir os 80%.
 
 ## 5. Fluxo de atualização e avaliação
 
-Sempre que o prompt for alterado, é necessário atualizar a versão
-publicada no LangSmith e executar novamente a avaliação.
+Sempre que o prompt for alterado, é necessário executar os testes
+automatizados, atualizar a versão publicada no LangSmith e executar
+novamente a avaliação.
 
 A sequência de execução é:
 
-### 1. Publicar os prompts no LangSmith
+### 1. Executar os testes automatizados
+
+Os testes foram implementados com `pytest` para verificar se o
+`system_prompt` está preenchido, se o formato de saída está
+especificado, se os exemplos Few-shot possuem a estrutura JSON esperada,
+se existem marcações `[TODO]` pendentes e se pelo menos duas técnicas
+estão listadas nos metadados do YAML.
+
+Caso o pytest ainda não esteja instalado, execute:
+
+``` bash
+pip install pytest
+```
+
+Para executar todos os testes, na raiz do projeto, utilize:
+
+``` bash
+python -m pytest -v
+```
+
+### 2. Publicar os prompts no LangSmith
 
 Execute:
 
@@ -169,7 +198,7 @@ python push_prompts.py
 Esse script envia/publica as definições dos prompts do projeto no
 LangSmith, permitindo que a avaliação utilize a versão atualizada.
 
-### 2. Executar a avaliação
+### 3. Executar a avaliação
 
 Após a publicação, execute:
 
